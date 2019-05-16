@@ -33,6 +33,7 @@ public class ThirdActivity extends AppCompatActivity {
     EditText edtTexto;
     Button btnGerar;
     ImageView ivQRCode;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
