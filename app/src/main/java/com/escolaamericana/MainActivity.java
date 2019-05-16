@@ -13,12 +13,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
-    private EditText Name;
+    public EditText Name;
     private EditText Password;
     private TextView Error;
     private Button Login;
     private Button Cadastro;
+    private RequestQueue mQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mQueue = Volley.newRequestQueue(this);
 
         Name = (EditText)findViewById(R.id.editText);
         Password = (EditText)findViewById(R.id.editText3);
@@ -54,32 +68,48 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    private void validate (String userName, String userPassword){
-        if (!(userName.substring(0, 1).equals("#") || userName.substring(0, 1).equals("@"))){
-            TextView tv = MainActivity.this.findViewById(R.id.editText2);
-            tv.setText("Usuário CCBEU deve começar com # e para pais, @.");
-            tv.setVisibility(View.VISIBLE);
-        }
-        if (userName.substring(0, 1).equals("#")) {
-            if (userName.equals("#ccbeu") && userPassword.equals("bueno123")) {
-                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                startActivity(intent);
-            } else {
-                TextView tv = MainActivity.this.findViewById(R.id.editText2);
-                tv.setText("Usuário ou senha incorretos");
-                tv.setVisibility(View.VISIBLE);
+    private void validate (final String userName, final String userPassword){
+        String url = "http://api.myjson.com/bins/7vyfu";
+        final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("pais");
+                    boolean sucesso = false;
+                    for (int i = 0; i < jsonArray.length(); i++){
+                        JSONObject pais = jsonArray.getJSONObject(i);
+
+                        String login = pais.getString("login");
+                        String senha = pais.getString("senha");
+                        if (login.equals(userName) && senha.equals((userPassword))){
+                            sucesso = true;
+                            if (login.substring(0, 1).equals("#")) {
+                                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                                startActivity(intent);
+                            }
+                            if (login.substring(0, 1).equals("@")) {
+                                Intent intent = new Intent(MainActivity.this, ThirdActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+                    }
+                    if (!sucesso){
+                        TextView tv = MainActivity.this.findViewById(R.id.editText2);
+                        tv.setText("Usuário ou senha incorretos");
+                        tv.setVisibility(View.VISIBLE);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-        }
-        if (userName.substring(0, 1).equals("@")) {
-            if (userName.equals("@floriano") && userPassword.equals("pai")) {
-                Intent intent = new Intent(MainActivity.this, ThirdActivity.class);
-                startActivity(intent);
-            } else {
-                TextView tv = MainActivity.this.findViewById(R.id.editText2);
-                tv.setText("Usuário ou senha incorretos");
-                tv.setVisibility(View.VISIBLE);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
             }
-        }
+        });
+        mQueue.add(request);
     }
 
     @Override
