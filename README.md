@@ -1,2 +1,0 @@
-# EscolaAmericana
-Aplicativo CCBEU
