@@ -24,6 +24,7 @@ import com.google.zxing.integration.android.IntentResult;
 public class SecondActivity extends AppCompatActivity {
     Button btnScan;
     Button Lista;
+    TextView nome1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

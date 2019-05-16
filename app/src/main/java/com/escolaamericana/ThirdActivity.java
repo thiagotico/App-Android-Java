@@ -47,7 +47,8 @@ public class ThirdActivity extends AppCompatActivity {
     }
 
     private void inicializarComponents(){
-        edtTexto = (EditText) findViewById(R.id.edtTexto);
+        TextView tv = ThirdActivity.this.findViewById(R.id.edtTexto);
+        tv.setText(Session.getUsuario().getFilho());
         btnGerar = (Button) findViewById(R.id.btnGerar);
         ivQRCode = (ImageView) findViewById(R.id.ivQRCode);
     }
@@ -62,7 +63,7 @@ public class ThirdActivity extends AppCompatActivity {
     }
 
     private void gerarQRCode(){
-        String texto = edtTexto.getText().toString();
+        String texto = Session.getUsuario().getFilho();
         if (!texto.equals("")) {
             MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
             closeKeyboard();

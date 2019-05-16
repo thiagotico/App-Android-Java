@@ -81,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
 
                         String login = pais.getString("login");
                         String senha = pais.getString("senha");
+                        String filho = pais.getString("filho");
+                        Usuario usuario = new Usuario();
+                        usuario.setFilho(filho);
+                        Session session = new Session(usuario);
                         if (login.equals(userName) && senha.equals((userPassword))){
                             sucesso = true;
                             if (login.substring(0, 1).equals("#")) {
@@ -91,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                                 Intent intent = new Intent(MainActivity.this, ThirdActivity.class);
                                 startActivity(intent);
                             }
+                            break;
                         }
                     }
                     if (!sucesso){
