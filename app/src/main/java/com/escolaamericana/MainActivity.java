@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView Error;
     private Button Login;
     private Button Cadastro;
-    private TextView Aaaa;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
