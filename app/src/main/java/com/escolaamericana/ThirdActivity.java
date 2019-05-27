@@ -33,7 +33,8 @@ public class ThirdActivity extends AppCompatActivity {
     EditText edtTexto;
     Button btnGerar;
     ImageView ivQRCode;
-    
+    private Button Cadastro;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,15 @@ public class ThirdActivity extends AppCompatActivity {
 
         inicializarComponents();
         clickButton();
+        Cadastro = (Button)findViewById(R.id.button2);
+
+        Cadastro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ThirdActivity.this, FifthActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void inicializarComponents(){

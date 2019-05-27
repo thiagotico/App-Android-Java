@@ -16,7 +16,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 
@@ -26,6 +37,7 @@ import java.util.List;
 public class FourthActivity extends AppCompatActivity {
     ListView listView;
     Button saidaAluno;
+    final String alunos [] = new String[] {"Aluno 1","Aluno 2","Aluno 3","Aluno 4","Aluno 5","Aluno 6","Aluno 7","Aluno 8","Aluno 9","Aluno 10","Aluno 11"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,31 +47,65 @@ public class FourthActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         listView = (ListView)findViewById(R.id.listaAlunos);
-        final ArrayList<String> arrayList = new ArrayList<>();
-
-        arrayList.add("Maria Aparecida");
-        arrayList.add("Jessica Caiado");
-        arrayList.add("Tais Barbosa");
-        arrayList.add("Natasha Burrel");
-        arrayList.add("Solange Gomes");
-        arrayList.add("Arcabouço");
-        arrayList.add("Biggus Dickus");
-        arrayList.add("Maria Aparecida");
-        arrayList.add("Jessica Caiado");
-        arrayList.add("Tais Barbosa");
-        arrayList.add("Natasha Burrel");
-        arrayList.add("Solange Gomes");
-        arrayList.add("Arcabouço");
-        arrayList.add("Biggus Dickus");
-        arrayList.add("Maria Aparecida");
-        arrayList.add("Jessica Caiado");
-        arrayList.add("Tais Barbosa");
-        arrayList.add("Natasha Burrel");
-        arrayList.add("Solange Gomes");
-        arrayList.add("Arcabouço");
-        arrayList.add("Biggus Dickus");
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_1, arrayList);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1, alunos);
         listView.setAdapter(arrayAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick (AdapterView<?> parent, View view, int position, long id){
+                final int pos = position;
+                AlertDialog.Builder builder = new AlertDialog.Builder(FourthActivity.this);
+
+                // Set a title for alert dialog
+                builder.setTitle("Confirmar entrega");
+
+                // Ask the final question
+                builder.setMessage("Deseja confirmar a saída do aluno?");
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                // User clicked the Yes button
+                                for (int i = pos; i < alunos.length; i++){
+                                    if (i == alunos.length - 1){
+                                        alunos[i] = "";
+                                        break;
+                                    }
+                                    alunos[i] = alunos[i+1];
+                                }
+                                listView.setAdapter(arrayAdapter);
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                // User clicked the No button
+                                Toast.makeText(getApplicationContext(),
+                                        "Você cancelou a saída", Toast.LENGTH_SHORT).show();
+                                break;
+
+                            case DialogInterface.BUTTON_NEUTRAL:
+                                // Neutral/Cancel button clicked
+                                Toast.makeText(getApplicationContext(),
+                                        "Escolha uma opção", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
+                };
+                // Set the alert dialog yes button click listener
+                builder.setPositiveButton("Sim", dialogClickListener);
+
+                // Set the alert dialog no button click listener
+                builder.setNegativeButton("Não",dialogClickListener);
+
+                // Set the alert dialog cancel/neutral button click listener
+                builder.setNeutralButton("Cancela", dialogClickListener);
+
+                AlertDialog dialog = builder.create();
+                // Display the three buttons alert dialog on interface
+                dialog.show();
+            }
+
+        });
         saidaAluno = (Button) findViewById(R.id.saidaAluno);
         saidaAluno.setOnClickListener(new View.OnClickListener() {
             @Override

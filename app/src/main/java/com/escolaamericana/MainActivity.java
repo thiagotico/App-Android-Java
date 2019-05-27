@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText Password;
     private TextView Error;
     private Button Login;
-    private Button Cadastro;
     private RequestQueue mQueue;
 
     @Override
@@ -50,20 +49,11 @@ public class MainActivity extends AppCompatActivity {
         Password = (EditText)findViewById(R.id.editText3);
         Login = (Button)findViewById(R.id.button);
         Error = (TextView) findViewById(R.id.editText2);
-        Cadastro = (Button)findViewById(R.id.button2);
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 validate(Name.getText().toString(),Password.getText().toString());
-            }
-        });
-
-        Cadastro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, FifthActivity.class);
-                startActivity(intent);
             }
         });
 

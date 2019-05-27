@@ -15,7 +15,9 @@
     <string name="cadastro">Fazer Cadastro</string>
     <string name="erroCadastro">Usuário ou senha incorretos</string>
     <string name="scan">Scan</string>
-    <string name="lista">Lista</string>
+    <string name="lista1">Lista 1</string>
+    <string name="lista2">Lista 2</string>
+    <string name="lista3">Lista 3</string>
     <string name="nomeFilho">Nome do Filho(a)</string>
     <string name="gerarQR">Gerar QR Code</string>
     <string name="recarregar">Recarregar</string>
@@ -23,4 +25,5 @@
     <string name="endereco">Endereço</string>
     <string name="enviarFoto">Enviar e \n Tirar Foto</string>
     <string name="tirarFoto">Tirar Foto \n da Identidade</string>
+    <string name="erroInternet">Verifique a conexão com a internet</string>
 </resources>

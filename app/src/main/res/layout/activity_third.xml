@@ -24,6 +24,7 @@
         android:layout_below="@+id/toolbar"
         android:text="@string/nomeFilho" />
 
+
     <Button
         android:id="@+id/btnGerar"
         android:layout_width="wrap_content"
@@ -31,6 +32,15 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/edtTexto"
         android:text="@string/gerarQR" />
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="120sp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/cadastro"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/btnGerar"
+        android:inputType="textPersonName" />
 
 
 
