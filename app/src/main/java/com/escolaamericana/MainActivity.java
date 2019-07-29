@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void validate (final String userName, final String userPassword){
-        String url = "http://api.myjson.com/bins/7vyfu";
+        String url = "https://api.myjson.com/bins/7vyfu";
         final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
