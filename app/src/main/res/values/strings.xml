@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Escola Americana</string>
+    <string name="action_settings">Settings</string>
+    <string name="name">Nome</string>
+    <string name="sobrenome">Sobrenome</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="title_activity_second">SecondActivity</string>
+    <string name="loginTry">Successful Login</string>
+    <string name="loginError">Wrong Password</string>
+    <string name="scanner">Escaneie o QR Code</string>
+    <string name="qrreader">QR code Reader</string>
+    <string name="title_activity_third">Gerar QR Code</string>
+    <string name="title_activity_fourth">Lista de Alunos</string>
+    <string name="cadastro">Fazer Cadastro</string>
+    <string name="erroCadastro">Usuário ou senha incorretos</string>
+    <string name="scan">Scan</string>
+    <string name="lista1">Lista 1</string>
+    <string name="lista2">Lista 2</string>
+    <string name="lista3">Lista 3</string>
+    <string name="nomeFilho">Nome do Filho(a)</string>
+    <string name="gerarQR">Gerar QR Code</string>
+    <string name="recarregar">Recarregar</string>
+    <string name="cep">CEP</string>
+    <string name="endereco">Endereço</string>
+    <string name="enviarFoto">Enviar e \n Tirar Foto</string>
+    <string name="tirarFoto">Tirar Foto \n da Identidade</string>
+    <string name="erroInternet">Verifique a conexão com a internet</string>
+</resources>

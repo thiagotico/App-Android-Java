@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#dfddc7"
+
+    tools:context=".MainActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="250sp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="25dp"
+        android:textSize="20sp"
+        android:hint="@string/name"
+        android:layout_below="@+id/toolbar"
+        android:inputType="textPersonName" />
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="250sp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/sobrenome"
+        android:layout_marginBottom="25dp"
+        android:layout_below="@+id/editText1"
+        android:inputType="textPersonName" />
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="250sp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/nomeFilho"
+        android:layout_marginBottom="25dp"
+        android:layout_below="@+id/editText2"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="250sp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/cep"
+        android:layout_marginBottom="25dp"
+        android:layout_below="@+id/editText3"
+        android:inputType="textPersonName" />
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="250sp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/endereco"
+        android:layout_marginBottom="40dp"
+        android:layout_below="@+id/editText4"
+        android:inputType="textPersonName" />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="120sp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/enviarFoto"
+        android:layout_below="@+id/editText5"
+        android:inputType="textPersonName" />
+
+</RelativeLayout>
