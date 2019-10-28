@@ -60,19 +60,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void validate (final String userName, final String userPassword){
-        String url = "https://api.myjson.com/bins/7vyfu";
+        String url = "http://restrito.ccbeu.com/android_connect/get_all_alunos.php";
         final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    JSONArray jsonArray = response.getJSONArray("pais");
+                    JSONArray jsonArray = response.getJSONArray("dados_alunos");
                     boolean sucesso = false;
                     for (int i = 0; i < jsonArray.length(); i++){
                         JSONObject pais = jsonArray.getJSONObject(i);
 
-                        String login = pais.getString("login");
+                        String login = pais.getString("usuario");
                         String senha = pais.getString("senha");
-                        String filho = pais.getString("filho");
+                        String filho = pais.getString("nome_filho");
                         Usuario usuario = new Usuario();
                         usuario.setFilho(filho);
                         Session session = new Session(usuario);

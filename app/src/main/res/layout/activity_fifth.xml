@@ -20,18 +20,10 @@
         android:layout_marginTop="35dp"
         android:layout_marginBottom="25dp"
         android:textSize="20sp"
-        android:hint="@string/name"
+        android:hint="@string/nome"
         android:layout_below="@+id/toolbar"
         android:inputType="textPersonName" />
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="250sp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:hint="@string/sobrenome"
-        android:layout_marginBottom="25dp"
-        android:layout_below="@+id/editText1"
-        android:inputType="textPersonName" />
+
     <EditText
         android:id="@+id/editText3"
         android:layout_width="250sp"
@@ -39,7 +31,7 @@
         android:layout_centerHorizontal="true"
         android:hint="@string/nomeFilho"
         android:layout_marginBottom="25dp"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/editText1"
         android:inputType="textPersonName" />
 
     <EditText
@@ -47,7 +39,7 @@
         android:layout_width="250sp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:hint="@string/cep"
+        android:hint="@string/usuario"
         android:layout_marginBottom="25dp"
         android:layout_below="@+id/editText3"
         android:inputType="textPersonName" />
@@ -56,16 +48,16 @@
         android:layout_width="250sp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:hint="@string/endereco"
+        android:hint="@string/senha"
         android:layout_marginBottom="40dp"
         android:layout_below="@+id/editText4"
         android:inputType="textPersonName" />
     <Button
         android:id="@+id/button"
-        android:layout_width="120sp"
+        android:layout_width="1200sp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:hint="@string/enviarFoto"
+        android:hint="@string/enviar"
         android:layout_below="@+id/editText5"
         android:inputType="textPersonName" />
 

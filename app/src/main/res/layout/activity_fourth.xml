@@ -15,11 +15,11 @@
 
 
     <Button
-        android:id="@+id/saidaAluno"
-        android:layout_width="wrap_content"
+        android:id="@+id/recarregar"
+        android:layout_width="1200sp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
         android:layout_marginBottom="20dp"
         android:layout_below="@+id/toolbar"
         android:text="@string/recarregar" />
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:layout_marginBottom="25dp"
-        android:layout_below="@+id/saidaAluno"
+        android:layout_below="@+id/recarregar"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -24,7 +24,7 @@ import com.google.zxing.integration.android.IntentResult;
 public class SecondActivity extends AppCompatActivity {
     Button btnScan;
     Button Lista;
-
+    Button cadastro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +40,20 @@ public class SecondActivity extends AppCompatActivity {
 
         btnScan = (Button) findViewById(R.id.btnScan);
         Lista = (Button)findViewById(R.id.button2);
+        cadastro = (Button)findViewById(R.id.button3);
         final Activity activity = this;
         Lista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 validate();
+            }
+        });
+
+        cadastro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SecondActivity.this, FourthActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -60,7 +69,7 @@ public class SecondActivity extends AppCompatActivity {
         });
     }
     private void validate () {
-        Intent intent = new Intent(SecondActivity.this, FourthActivity.class);
+        Intent intent = new Intent(SecondActivity.this, FifthActivity.class);
         startActivity(intent);
     }
     @Override
