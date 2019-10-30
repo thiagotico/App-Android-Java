@@ -87,7 +87,12 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        String testeCCBEU = result.getContents().substring(0,5);
+        String testeCCBEU;
+        if (result.getContents().length() > 5) {
+            testeCCBEU = result.getContents().substring(0, 5);
+        }else {
+            testeCCBEU = "";
+        }
 
         if (result != null){
             if (result.getContents() != null){
