@@ -1,57 +1,138 @@
 package com.escolaamericana;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.EditText;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class FifthActivity extends AppCompatActivity {
 
+    // Progress Dialog
+    private ProgressDialog pDialog;
+
+    JSONParser jsonParser = new JSONParser();
+    EditText inputNome;
+    EditText inputFilho;
+    EditText inputUsuario;
+    EditText inputSenha;
+    // url to create new product
+    private static String url_create_product = "http://restrito.ccbeu.com/android_connect/create_aluno.php";
+
+    // JSON Node names
+    private static final String TAG_SUCCESS = "success";
+
     private Button Cadastro;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fifth);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        // Edit Text
+        inputNome = (EditText) findViewById(R.id.editText1);
+        inputFilho = (EditText) findViewById(R.id.editText3);
+        inputUsuario = (EditText) findViewById(R.id.editText4);
+        inputSenha = (EditText) findViewById(R.id.editText5);
 
-        Cadastro = (Button)findViewById(R.id.button);
+        // Create button
+        Button btnCreateProduct = (Button) findViewById(R.id.button);
 
-        Cadastro.setOnClickListener(new View.OnClickListener() {
+        // button click event
+        btnCreateProduct.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(FifthActivity.this, SixthActivity.class);
-                startActivity(intent);
+            public void onClick(View view) {
+                // creating new product in background thread
+                new CreateNewProduct().execute();
             }
         });
-
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.example_menu, menu);
-        return true;
-    }
+    /**
+     * Background Async Task to Create new product
+     * */
+    class CreateNewProduct extends AsyncTask<String, String, String> {
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item1:
-                int pid = android.os.Process.myPid();
-                android.os.Process.killProcess(pid);
-                Intent intent = new Intent(FifthActivity.this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        /**
+         * Before starting background thread Show Progress Dialog
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(FifthActivity.this);
+            pDialog.setMessage("Criando Usuário...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
         }
+
+        /**
+         * Creating product
+         * */
+        protected String doInBackground(String... args) {
+            String name = inputNome.getText().toString();
+            String price = inputFilho.getText().toString();
+            String description = inputUsuario.getText().toString();
+            String usuario = inputSenha.getText().toString();
+
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("nome", name));
+            params.add(new BasicNameValuePair("nome_filho", price));
+            params.add(new BasicNameValuePair("usuario", description));
+            params.add(new BasicNameValuePair("senha", usuario));
+
+            // getting JSON Object
+            // Note that create product url accepts POST method
+            JSONObject json = jsonParser.makeHttpRequest(url_create_product,
+                    "POST", params);
+
+            // check log cat fro response
+            Log.d("Create Response", json.toString());
+
+            // check for success tag
+            try {
+                int success = json.getInt(TAG_SUCCESS);
+
+                if (success == 1) {
+                    // successfully created product
+                    Intent i = new Intent(getApplicationContext(), SecondActivity.class);
+                    startActivity(i);
+
+                    // closing this screen
+                    finish();
+                } else {
+                    // failed to create product
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+            pDialog.dismiss();
+        }
+
     }
 
 }

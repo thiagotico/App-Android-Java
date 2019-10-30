@@ -1,14 +1,17 @@
 package com.escolaamericana;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,31 +23,49 @@ import android.os.Vibrator;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class SecondActivity extends AppCompatActivity {
     Button btnScan;
     Button Lista;
-
+    Button cadastro;
+    String nomeAluno;
+    private static final String TAG_SUCCESS = "success";
+    private ProgressDialog pDialog;
+    JSONParser jsonParser = new JSONParser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)                {
-            setContentView(R.layout.activity_second);
-        }else {
-            setContentView(R.layout.activity_second_land);
-        }
+        setContentView(R.layout.activity_second);
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         btnScan = (Button) findViewById(R.id.btnScan);
         Lista = (Button)findViewById(R.id.button2);
+        cadastro = (Button)findViewById(R.id.button3);
         final Activity activity = this;
         Lista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 validate();
+            }
+        });
+
+        cadastro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SecondActivity.this, FourthActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -60,15 +81,28 @@ public class SecondActivity extends AppCompatActivity {
         });
     }
     private void validate () {
-        Intent intent = new Intent(SecondActivity.this, FourthActivity.class);
+        Intent intent = new Intent(SecondActivity.this, FifthActivity.class);
         startActivity(intent);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        String testeCCBEU;
+        if (result.getContents().length() > 5) {
+            testeCCBEU = result.getContents().substring(0, 5);
+        }else {
+            testeCCBEU = "";
+        }
+
         if (result != null){
             if (result.getContents() != null){
-                alert(result.getContents());
+                if (testeCCBEU.equals("CCBEU")) {
+                    alert(result.getContents());
+                    nomeAluno = result.getContents().substring(5);
+                    new CriarAlunoLista().execute();
+                }else{
+                    alert("QR Code inválido");
+                }
             }else {
                 alert("Scan cancelado");
             }
@@ -98,5 +132,81 @@ public class SecondActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void gravarAluno(){
+
+
+        String url = "http://restrito.ccbeu.com/android_connect/create_aluno_registro.php";
+        String name = nomeAluno;
+
+        // Building Parameters
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("aluno", name));
+
+        // getting JSON Object
+        // Note that create product url accepts POST method
+        JSONObject json = jsonParser.makeHttpRequest(url,
+                "POST", params);
+
+        // check log cat fro response
+        Log.d("Create Response", json.toString());
+
+            // check for success tag
+    }
+
+    class CriarAlunoLista extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(SecondActivity.this);
+            pDialog.setMessage("Registrando Aluno...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        /**
+         * Creating product
+         * */
+        protected String doInBackground(String... args) {
+            String url = "http://restrito.ccbeu.com/android_connect/create_aluno_saida.php";
+            String name = nomeAluno;
+
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("aluno", name));
+
+            // getting JSON Object
+            // Note that create product url accepts POST method
+            JSONObject json = jsonParser.makeHttpRequest(url,
+                    "POST", params);
+            gravarAluno();
+
+            // check log cat fro response
+            Log.d("Create Response", json.toString());
+
+            // check for success tag
+            try {
+                int success = json.getInt(TAG_SUCCESS);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+            pDialog.dismiss();
+        }
+
     }
 }

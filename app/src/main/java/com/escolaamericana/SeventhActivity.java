@@ -61,7 +61,7 @@ import java.util.List;
 
 
 
-public class FourthActivity extends AppCompatActivity {
+public class SeventhActivity extends AppCompatActivity {
     ListView listView;
     Button saidaAluno;
     String pid;
@@ -100,63 +100,63 @@ public class FourthActivity extends AppCompatActivity {
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1, alunosArray);
         listView.setAdapter(arrayAdapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick (AdapterView<?> parent, View view, int position, long id){
-                final int pos = position;
-                AlertDialog.Builder builder = new AlertDialog.Builder(FourthActivity.this);
-
-                // Set a title for alert dialog
-                builder.setTitle("Confirmar entrega");
-
-                // Ask the final question
-                builder.setMessage("Deseja confirmar a saída do aluno?");
-                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case DialogInterface.BUTTON_POSITIVE:
-                                // User clicked the Yes button
-                                setPos(pos);
-                                for (int i = pos; i < alunosArray.length; i++){
-                                    if (i == alunosArray.length - 1){
-                                        alunosArray[i] = "";
-                                        break;
-                                    }
-                                    alunosArray[i] = alunosArray[i+1];
-                                }
-                                listView.setAdapter(arrayAdapter);
-                                break;
-
-                            case DialogInterface.BUTTON_NEGATIVE:
-                                // User clicked the No button
-                                Toast.makeText(getApplicationContext(),
-                                        "Você cancelou a saída", Toast.LENGTH_SHORT).show();
-                                break;
-
-                            case DialogInterface.BUTTON_NEUTRAL:
-                                // Neutral/Cancel button clicked
-                                Toast.makeText(getApplicationContext(),
-                                        "Escolha uma opção", Toast.LENGTH_SHORT).show();
-                                break;
-                        }
-                    }
-                };
-                // Set the alert dialog yes button click listener
-                builder.setPositiveButton("Sim", dialogClickListener);
-
-                // Set the alert dialog no button click listener
-                builder.setNegativeButton("Não",dialogClickListener);
-
-                // Set the alert dialog cancel/neutral button click listener
-                builder.setNeutralButton("Cancela", dialogClickListener);
-
-                AlertDialog dialog = builder.create();
-                // Display the three buttons alert dialog on interface
-                dialog.show();
-            }
-
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+//            @Override
+//            public void onItemClick (AdapterView<?> parent, View view, int position, long id){
+//                final int pos = position;
+//                AlertDialog.Builder builder = new AlertDialog.Builder(SeventhActivity.this);
+//
+//                // Set a title for alert dialog
+//                builder.setTitle("Confirmar entrega");
+//
+//                // Ask the final question
+//                builder.setMessage("Deseja confirmar a saída do aluno?");
+//                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        switch (which) {
+//                            case DialogInterface.BUTTON_POSITIVE:
+//                                // User clicked the Yes button
+//                                setPos(pos);
+//                                for (int i = pos; i < alunosArray.length; i++){
+//                                    if (i == alunosArray.length - 1){
+//                                        alunosArray[i] = "";
+//                                        break;
+//                                    }
+//                                    alunosArray[i] = alunosArray[i+1];
+//                                }
+//                                listView.setAdapter(arrayAdapter);
+//                                break;
+//
+//                            case DialogInterface.BUTTON_NEGATIVE:
+//                                // User clicked the No button
+//                                Toast.makeText(getApplicationContext(),
+//                                        "Você cancelou a saída", Toast.LENGTH_SHORT).show();
+//                                break;
+//
+//                            case DialogInterface.BUTTON_NEUTRAL:
+//                                // Neutral/Cancel button clicked
+//                                Toast.makeText(getApplicationContext(),
+//                                        "Escolha uma opção", Toast.LENGTH_SHORT).show();
+//                                break;
+//                        }
+//                    }
+//                };
+//                // Set the alert dialog yes button click listener
+//                builder.setPositiveButton("Sim", dialogClickListener);
+//
+//                // Set the alert dialog no button click listener
+//                builder.setNegativeButton("Não",dialogClickListener);
+//
+//                // Set the alert dialog cancel/neutral button click listener
+//                builder.setNeutralButton("Cancela", dialogClickListener);
+//
+//                AlertDialog dialog = builder.create();
+//                // Display the three buttons alert dialog on interface
+//                dialog.show();
+//            }
+//
+//        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -171,11 +171,11 @@ public class FourthActivity extends AppCompatActivity {
             case R.id.item1:
                 int pid = android.os.Process.myPid();
                 android.os.Process.killProcess(pid);
-                Intent intent = new Intent(FourthActivity.this, MainActivity.class);
+                Intent intent = new Intent(SeventhActivity.this, MainActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.item2:
-                Intent intent2 = new Intent(FourthActivity.this, SecondActivity.class);
+                Intent intent2 = new Intent(SeventhActivity.this, SecondActivity.class);
                 startActivity(intent2);
         }
         return super.onOptionsItemSelected(item);
@@ -246,7 +246,7 @@ public class FourthActivity extends AppCompatActivity {
         mQueue.add(request);
     }
 
-//    private void deleteAluno () {
+    //    private void deleteAluno () {
 //        String url_delete_product = "http://restrito.ccbeu.com/android_connect/delete_aluno_saida.php";
 //
 //
@@ -278,7 +278,7 @@ public class FourthActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(FourthActivity.this);
+            pDialog = new ProgressDialog(SeventhActivity.this);
             pDialog.setMessage("Retirando aluno da lista");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
@@ -292,18 +292,18 @@ public class FourthActivity extends AppCompatActivity {
 
             // Check for success tag
             int success;
-                // Building Parameters
-                List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("pid", pid));
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("pid", pid));
 
-                // getting product details by making HTTP request
-                JSONObject json = jsonParser.makeHttpRequest(
-                        url_delete_product, "POST", params);
+            // getting product details by making HTTP request
+            JSONObject json = jsonParser.makeHttpRequest(
+                    url_delete_product, "POST", params);
 
-                // check your log for json response
+            // check your log for json response
 //                Log.d("Delete Product", json.toString());
 
-                // json success tag
+            // json success tag
 
             return null;
         }
@@ -319,3 +319,4 @@ public class FourthActivity extends AppCompatActivity {
 
     }
 }
+

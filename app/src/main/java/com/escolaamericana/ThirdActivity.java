@@ -1,10 +1,12 @@
 package com.escolaamericana;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.inputmethodservice.Keyboard;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
@@ -28,12 +30,22 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class ThirdActivity extends AppCompatActivity {
 
     EditText edtTexto;
     Button btnGerar;
     ImageView ivQRCode;
     private Button Cadastro;
+    private ProgressDialog pDialog;
+    private static final String TAG_NAME = "nome";
 
 
     @Override
@@ -51,7 +63,7 @@ public class ThirdActivity extends AppCompatActivity {
         Cadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ThirdActivity.this, FifthActivity.class);
+                Intent intent = new Intent(ThirdActivity.this, SeventhActivity.class);
                 startActivity(intent);
             }
         });
@@ -74,7 +86,7 @@ public class ThirdActivity extends AppCompatActivity {
     }
 
     private void gerarQRCode(){
-        String texto = Session.getUsuario().getFilho();
+        String texto = "CCBEU" + Session.getUsuario().getFilho();
         if (!texto.equals("")) {
             MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
             closeKeyboard();
@@ -114,4 +126,5 @@ public class ThirdActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
