@@ -279,7 +279,7 @@ public class FourthActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(FourthActivity.this);
-            pDialog.setMessage("Deleting Product...");
+            pDialog.setMessage("Retirando aluno da lista");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
