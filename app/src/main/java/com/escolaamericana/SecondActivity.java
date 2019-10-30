@@ -87,11 +87,17 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        String testeCCBEU = result.getContents().substring(0,5);
+
         if (result != null){
             if (result.getContents() != null){
-                alert(result.getContents());
-                nomeAluno = result.getContents();
-                new CriarAlunoLista().execute();
+                if (testeCCBEU.equals("CCBEU")) {
+                    alert(result.getContents());
+                    nomeAluno = result.getContents().substring(5);
+                    new CriarAlunoLista().execute();
+                }else{
+                    alert("QR Code inválido");
+                }
             }else {
                 alert("Scan cancelado");
             }
@@ -122,6 +128,26 @@ public class SecondActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    public void gravarAluno(){
+
+
+        String url = "http://restrito.ccbeu.com/android_connect/create_aluno_registro.php";
+        String name = nomeAluno;
+
+        // Building Parameters
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("aluno", name));
+
+        // getting JSON Object
+        // Note that create product url accepts POST method
+        JSONObject json = jsonParser.makeHttpRequest(url,
+                "POST", params);
+
+        // check log cat fro response
+        Log.d("Create Response", json.toString());
+
+            // check for success tag
+    }
 
     class CriarAlunoLista extends AsyncTask<String, String, String> {
 
@@ -132,7 +158,7 @@ public class SecondActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(SecondActivity.this);
-            pDialog.setMessage("Creating Product..");
+            pDialog.setMessage("Registrando Aluno...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
@@ -153,6 +179,7 @@ public class SecondActivity extends AppCompatActivity {
             // Note that create product url accepts POST method
             JSONObject json = jsonParser.makeHttpRequest(url,
                     "POST", params);
+            gravarAluno();
 
             // check log cat fro response
             Log.d("Create Response", json.toString());

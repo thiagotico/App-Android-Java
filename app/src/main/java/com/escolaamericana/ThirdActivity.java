@@ -86,7 +86,7 @@ public class ThirdActivity extends AppCompatActivity {
     }
 
     private void gerarQRCode(){
-        String texto = Session.getUsuario().getFilho();
+        String texto = "CCBEU" + Session.getUsuario().getFilho();
         if (!texto.equals("")) {
             MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
             closeKeyboard();
