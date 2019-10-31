@@ -175,7 +175,7 @@ public class SeventhActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.item2:
-                Intent intent2 = new Intent(SeventhActivity.this, SecondActivity.class);
+                Intent intent2 = new Intent(SeventhActivity.this, ThirdActivity.class);
                 startActivity(intent2);
         }
         return super.onOptionsItemSelected(item);
