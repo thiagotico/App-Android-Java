@@ -6,4 +6,5 @@ The app is working (it is connecting to a database and doing everything it was s
 
 Down below you can see screenshots of the app
 
-<img width="1451" alt="app" src="https://user-images.githubusercontent.com/45434364/201367466-46c9de71-4305-4020-ae0b-409145bae43d.png">
+<img width="723" alt="app1" src="https://user-images.githubusercontent.com/45434364/201369976-e8fefd0e-02ef-44e4-a49c-2ff80e6b2f1a.png">
+<img width="717" alt="app2" src="https://user-images.githubusercontent.com/45434364/201369994-1efb44ba-fcf7-48ec-8cff-4371b4b953e6.png">
