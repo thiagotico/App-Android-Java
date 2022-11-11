@@ -97,7 +97,7 @@ public class SecondActivity extends AppCompatActivity {
         if (result != null){
             if (result.getContents() != null){
                 if (testeCCBEU.equals("CCBEU")) {
-                    alert(result.getContents());
+                    alert(result.getContents().substring(5, result.getContents().length()));
                     nomeAluno = result.getContents().substring(5);
                     new CriarAlunoLista().execute();
                 }else{
