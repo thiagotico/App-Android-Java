@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void validate (final String userName, final String userPassword){
-        String url = "http://restrito.ccbeu.com/android_connect/get_all_alunos.php";
+        String url = "RESTRICTED";
         final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

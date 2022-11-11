@@ -31,7 +31,7 @@ public class FifthActivity extends AppCompatActivity {
     EditText inputUsuario;
     EditText inputSenha;
     // url to create new product
-    private static String url_create_product = "http://restrito.ccbeu.com/android_connect/create_aluno.php";
+    private static String url_create_product = "RESTRICTED";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";

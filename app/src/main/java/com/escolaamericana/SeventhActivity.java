@@ -187,7 +187,7 @@ public class SeventhActivity extends AppCompatActivity {
 
     private void setPos (final int teste2){
 
-        String url = "http://restrito.ccbeu.com/android_connect/get_all_alunos_temp.php";
+        String url = "RESTRICTED";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
 
@@ -217,7 +217,7 @@ public class SeventhActivity extends AppCompatActivity {
 
 
     private void getAluno() {
-        String url = "http://restrito.ccbeu.com/android_connect/get_all_alunos_temp.php";
+        String url = "RESTRICTED";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
 
@@ -271,7 +271,7 @@ public class SeventhActivity extends AppCompatActivity {
 //
 //    }
     class DeleteProduct extends AsyncTask<String, String, String> {
-        String url_delete_product = "http://restrito.ccbeu.com/android_connect/delete_aluno_saida.php";
+        String url_delete_product = "RESTRICTED";
         /**
          * Before starting background thread Show Progress Dialog
          * */

@@ -136,7 +136,7 @@ public class SecondActivity extends AppCompatActivity {
     public void gravarAluno(){
 
 
-        String url = "http://restrito.ccbeu.com/android_connect/create_aluno_registro.php";
+        String url = "RESTRICTED";
         String name = nomeAluno;
 
         // Building Parameters
@@ -173,7 +173,7 @@ public class SecondActivity extends AppCompatActivity {
          * Creating product
          * */
         protected String doInBackground(String... args) {
-            String url = "http://restrito.ccbeu.com/android_connect/create_aluno_saida.php";
+            String url = "RESTRICTED";
             String name = nomeAluno;
 
             // Building Parameters
